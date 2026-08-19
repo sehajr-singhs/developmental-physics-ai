@@ -1,0 +1,290 @@
+\documentclass[11pt,oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{abstract}
+
+\title{\textbf{Developmental Physics AI:\\
+Learning Intuitive Theories Through Embodied Interaction}}
+
+\author{
+  Developmental Physics AI Project\\
+  \texttt{dev-physics-ai@example.org}
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We argue that contemporary artificial intelligence systems lack the {\em core knowledge} that human infants possess: an intuitive understanding of objects, agents, forces, space, and time. We propose a developmental approach to machine learning in which an artificial agent learns physics through raw, unstructured sensory interaction with simulated environments. By combining the angle geometry of angle-nets with the physics constraints of UGCT, and guided by principles of predictive coding and active inference, we outline a four-stage developmental curriculum: sensorimotor learning, intuitive physics, intuitive psychology, and symbolic reasoning. We further connect this proposal to foundational work in developmental psychology and argue that a curriculum grounded in physical interaction is a necessary condition for robust, generalizable intelligence.
+\end{abstract}
+
+\section{Introduction}
+
+Modern machine learning has produced systems with superhuman performance on narrow tasks: image classification, board games, and even protein folding. Yet these systems display striking brittleness when faced with the simplest physical reasoning problems that a human infant solves within the first year of life. A three-month-old expects objects to obey gravity; a one-year-old knows that a solid barrier prevents motion; a two-year-old distinguishes animate from inanimate agents by their goal-directed behavior. These capacities are not acquired through supervised training on labeled datasets. They emerge from {\em development}: a prolonged, self-supervised process of interaction with the world.
+
+The central thesis of this manifesto is that \textbf{artificial intelligence will not achieve genuine understanding until it undergoes a comparable developmental process}. We propose building \emph{Developmental Physics AI}: an artificial learner that constructs intuitive theories of physics through embodied interaction, beginning with raw sensory streams and progressing through developmental stages analogous to those observed in human infants.
+
+\subsection{The Core Knowledge Deficit}
+
+Contemporary vision models \citep{dosovitskiy2020image} and large language models \citep{brown2020language} are trained on vast corpora of curated, labeled, or filtered data. They excel at statistical abstraction but fail at what \citet{spelke2007core} call \emph{core knowledge}: a set of domain-specific representational systems that are present from birth (or emerge very early) and provide the foundation for later learning.
+
+Spelke's core knowledge framework identifies four core systems:
+\begin{enumerate}
+  \item \textbf{Objects}: Infants represent objects as cohesive, bounded units that move on continuous paths and persist through occlusion.
+  \item \textbf{Agents}: Infants distinguish autonomous entities that act goal-directedly from inert objects.
+  \item \textbf{Number}: Infants represent approximate numerosity and ordinal relations.
+  \item \textbf{Space}: Infants represent geometric relations and navigate by metric and landmark cues.
+\end{enumerate}
+
+Critically, these systems are \emph{not learned} from data in the statistical sense. They are the starting conditions for learning. Large-scale pretraining bypasses them entirely, leaving models without the ontological scaffolding needed to ground symbols in a physical world.
+
+\subsection{Developmental AI: A Brief History}
+
+The idea that machines should learn like children has a long pedigree. \citet{lake2017building} argued that building machines that learn like humans requires model-based reasoning, learning-to-learn, and compositionality. \citet{boden2006mind} situated artificial general intelligence within developmental frameworks. More recently, \citet{smith2021developmental} showed that neural networks trained with developmental curricula outperform static pretraining on out-of-distribution generalization.
+
+However, most developmental AI work remains symbolic or hybrid. We propose a fully neural, embodied, and interactive approach that builds physical understanding \emph{bottom-up} from sensory prediction.
+
+\section{Related Work}
+
+\subsection{Developmental Psychology}
+
+A rich empirical literature documents the trajectory of physical understanding in infants. \citet{spelke1995spatial} demonstrated that infants as young as three months represent object permanence and continuity. \citet{ Baillargeon1994 } used the violation-of-expectation paradigm to show that infants understand solidity and support before they can reach for objects themselves. \citet{gopnik2012scientist} proposed that children are intuitive scientists, testing hypotheses about the world through play. \citet{carey2009origin} traced how core knowledge differentiates into adult scientific concepts. These findings provide both a \emph{target} (what the AI should eventually know) and a \emph{curriculum} (in what order to teach it).
+
+\subsection{Angle Geometry and UGCT}
+
+Our technical approach builds on two complementary frameworks.
+
+\textbf{Angle-nets} \citep{anglenets2023} introduce structured geometric reasoning into neural network weights. Rather than treating weights as unstructured scalars, angle-nets parameterize weight matrices through geometric angles, preserving relational structure and enabling zero-shot generalization to novel configurations. This provides a natural mechanism for encoding spatial relations and symmetry.
+
+\textbf{UGCT} \citep{ugct2023} (Universal Geometry-Constrained Training) encodes physical constraints directly into the learning objective. By adding differentiable constraints for conservation laws, symmetries, and boundary conditions, UGCT ensures that learned representations respect the structure of the physical world. We integrate UGCT's constraint-based objectives with angle-nets' geometric weight structures to create a model whose inductive biases are aligned with Newtonian mechanics.
+
+\subsection{Predictive Coding and Active Inference}
+
+Predictive coding \citep{friston2005theory} posits that the brain is fundamentally a prediction machine: neurons encode predictions of their inputs, and only prediction errors propagate forward. This provides a unified objective for unsupervised learning: minimize the discrepancy between predicted and observed sensory states.
+
+Active inference \citep{friston2010free} extends predictive coding to action: the agent acts to minimize expected prediction error. In our framework, the model selects actions that reduce uncertainty about future sensory states, effectively ``experimenting'' on the world to refine its internal model.
+
+\section{Proposed Framework: Developmental Physics AI}
+
+\subsection{Overview}
+
+We propose an artificial agent that undergoes a four-stage developmental curriculum. Each stage builds on the representations acquired in the previous one. Crucially, at every stage, learning is \emph{unsupervised}: the agent receives only raw sensory input and a scalar reward derived from its own prediction error (or curiosity signal). No task-specific labels are provided.
+
+\subsection{Stage 1: Sensorimotor Learning}
+
+\textbf{Goal:} Acquire representations of objects, spatial relations, and basic dynamics.
+
+\textbf{Environment:} A simple 2D world containing balls, walls, and collision events.
+
+\textbf{Sensory Input:} Raw position and velocity vectors for each object, plus binary contact signals when objects touch.
+
+\textbf{Learning:} The agent trains a predictive model $P(s_{t+1} \mid s_t, a_t)$ to forecast the next sensory state. Angle-net layers encode spatial relations geometrically; UGCT constraints enforce conservation of momentum and energy during collisions.
+
+\textbf{Active Inference:} The agent executes random or curiosity-driven actions (e.g., pushing objects, bouncing balls) and selects those that maximize information gain about its predictive model.
+
+\textbf{Expected Outcome:} After sensorimotor training, the agent has internal representations that behave like Spelke's core object system: objects are perceived as cohesive, bounded, and persistent.
+
+\subsection{Stage 2: Intuitive Physics}
+
+\textbf{Goal:} Learn force, gravity, support, and fluid-like dynamics.
+
+\textbf{Environment:} The 2D world is extended with variable gravity, inclined planes, pendulums, and soft bodies.
+
+\textbf{Sensory Input:} Same as Stage 1, augmented with contact-force magnitudes.
+
+\textbf{Learning:} The predictive model is upgraded to include an explicit forward dynamics module $F(s_t, a_t) \rightarrow \Delta s_t$. The model is regularized by UGCT constraints for Newton's second law ($F=ma$) and universal gravitation. Angle-nets encode relational structure between objects.
+
+\textbf{Active Inference:} The agent experiments by dropping objects from different heights, rolling them down ramps, and stacking blocks to test support hypotheses.
+
+\textbf{Expected Outcome:} The agent develops an intuitive grasp of force, mass, and support, mirroring Baillargeon's findings that infants understand solidity and containment before language acquisition.
+
+\subsection{Stage 3: Intuitive Psychology}
+
+\textbf{Goal:} Learn agents, goals, beliefs, and theory of mind.
+
+\textbf{Environment:} Introduction of simple \emph{agents} — entities with internal goals that pursue them via rudimentary motion planning.
+
+\textbf{Sensory Input:} Positions and velocities of both physical objects and agents. Agents have a \emph{goal state} visible to the model (e.g., a target location).
+
+\textbf{Learning:} The model learns to infer hidden goals and beliefs from observed trajectories. A separate \emph{agent module} predicts future agent actions given current observations.
+
+\textbf{Active Inference:} The learner interacts with agents by placing obstacles in their path, observing whether they replan (indicating goal-directedness), and testing false-belief scenarios.
+
+\textbf{Expected Outcome:} The agent acquires theory-of-mind capacities analogous to those observed by \citet{onishi2005believing} and \citet{baron1995belief} in infants.
+
+\subsection{Stage 4: Symbolic Reasoning}
+
+\textbf{Goal:} Ground language, mathematics, and abstract rules in physical experience.
+
+\textbf{Environment:} The physical world is augmented with symbolic channels: natural language descriptions of objects, numbers labeling quantities, and rule boards specifying logical constraints.
+
+\textbf{Learning:} The model aligns symbolic embeddings with physical embeddings via contrastive learning. Mathematical operations (addition, subtraction) are grounded in physical manipulation (combining and splitting object collections).
+
+\textbf{Active Inference:} The agent uses language to query the world (``Where is the red ball?'') and manipulates objects to solve arithmetic word problems.
+
+\textbf{Expected Outcome:} The agent demonstrates systematic generalization: it can solve novel word problems by composing known physical and linguistic primitives.
+
+\section{Technical Architecture}
+
+\subsection{Sensory Encoding}
+
+The sensory encoder $\phi_\theta$ maps raw input $o_t$ into a latent representation $z_t = \phi_\theta(o_t)$. For the sensorimotor stage, this is a shallow MLP with angle-net geometric layers. For later stages, it is a multimodal transformer that processes visual, tactile, and symbolic channels.
+
+\subsection{Angle-Weighted Reasoning}
+
+Inspired by angle-nets, we parameterize transition matrices $T$ through geometric angles:
+\[
+T_{ij} = \cos(\alpha_{ij}) \cdot \exp(\beta_{ij}),
+\]
+where $\alpha_{ij}$ encodes the relational angle between object $i$ and object $j$, and $\beta_{ij}$ encodes interaction strength. This ensures that weight matrices respect geometric symmetries and enables zero-shot transfer to novel spatial configurations.
+
+\subsection{Physics Prediction Module}
+
+Following UGCT, we add differentiable physics constraints to the loss:
+\[
+\mathcal{L}_{\text{physics}} = \sum_{t} \left\| F_{\text{model}}(s_t, a_t) - F_{\text{Newton}}(s_t, a_t) \right\|^2 + \lambda_{\text{cons}} \cdot \mathcal{L}_{\text{conservation}}.
+\]
+$\mathcal{L}_{\text{conservation}}$ penalizes violations of linear momentum, angular momentum, and energy conservation. These constraints are soft during early training and harden as the model matures.
+
+\subsection{Predictive Coding Objective}
+
+The overall training objective combines reconstruction and physics consistency:
+\[
+\mathcal{L} = \underbrace{\mathbb{E}\left[\| s_{t+1} - \hat{s}_{t+1} \|^2 \right]}_{\text{prediction}} + \lambda_{\text{phys}} \mathcal{L}_{\text{physics}} + \underbrace{\beta \cdot \mathbb{E}\left[ \text{KL}(q(z|o) \| p(z)) \right]}_{\text{regularization}}.
+\]
+
+\subsection{Active Inference Loop}
+
+At each timestep, the agent:
+\begin{enumerate}
+  \item Observes $o_t$ and encodes $z_t$.
+  \item Predicts $z_{t+1}$ under candidate actions $a \in \mathcal{A}$.
+  \item Selects $a^* = \arg\min_a \mathbb{E}\left[ \| z_{t+1} - \hat{z}_{t+1}(a) \|^2 \right] + \eta \cdot H(z_{t+1})$,
+\end{enumerate}
+where the entropy term $H(z_{t+1})$ encourages exploration of uncertain states.
+
+\section{Discussion}
+
+\subsection{Why Development Matters}
+
+Training on static datasets is fundamentally limited: the model can only learn correlations that exist in the training distribution. Development provides \emph{off-distribution} experience through active interaction, forcing the model to build causal models that generalize. This is consistent with the consensus in developmental psychology that children learn by doing \citep{gopnik2012scientist} and with the AI literature on the limitations of passive pretraining \citep{lake2017building}.
+
+\subsection{Relation to Existing AI Architectures}
+
+Our proposal can be seen as an extension of world models \citep{ha2018world} and Dreamer-style agents \citep{ha2020dream}, augmented with developmental curricula, angle-geometric inductive biases, and hard physics constraints. Unlike Dreamer, which learns dynamics from pixel observations alone, we provide structured sensory channels and a staged curriculum aligned with infant development. Unlike world models, our objectives include active inference and theory-of-mind modules.
+
+\subsection{Open Questions}
+
+Several challenges remain. First, the sensorimotor stage requires a simulator that is both physically accurate and computationally efficient. Second, defining appropriate curiosity signals that drive productive exploration without leading to catastrophic forgetting is nontrivial. Third, scaling the architecture to high-dimensional visual inputs while preserving angle-geometric inductive biases requires careful design. Fourth, connecting Stage 4 symbolic reasoning to grounded language understanding remains an open problem.
+
+\section{Conclusion}
+
+We have outlined a manifesto for Developmental Physics AI: an artificial intelligence that learns physics the way a child does — from the bottom up, through embodied interaction, across developmental stages. By integrating angle geometry, physics constraints, predictive coding, and active inference, and grounding the curriculum in the empirical findings of developmental psychology, we believe it is possible to build AI systems that possess genuine physical intuition. Such systems would not only advance artificial intelligence but also provide a computational platform for testing theories of human cognitive development.
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem{ Baillargeon1994 }
+R. Baillargeon.
+\newblock Object permanence in 3.5- and 4.5-month-old infants.
+\newblock \emph{Developmental Psychology}, 30(1):47--61, 1994.
+
+\bibitem{ baron1995belief }
+A. Baron-Cohen, S. Leslie, and U. Frith.
+\newblock Does the autistic child have a ``theory of mind''?
+\newblock \emph{Cognition}, 21(1):37--46, 1985.
+
+\bibitem{ boden2006mind }
+M. A. Boden.
+\emph{Mind as Machine: A History of Cognitive Science}.
+\newblock Oxford University Press, 2006.
+
+\bibitem{ brown2020language }
+T. Brown et al.
+\newblock Language models are few-shot learners.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2020.
+
+\bibitem{ carey2009origin }
+S. Carey.
+\emph{The Origin of Concepts}.
+\newblock Oxford University Press, 2009.
+
+\bibitem{ dosovitskiy2020image }
+A. Dosovitskiy et al.
+\newblock An image is worth 16x16 words: Transformers for image recognition at scale.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+
+\bibitem{ friston2005theory }
+K. Friston.
+\newblock A theory of cortical responses.
+\newblock \emph{Philosophical Transactions of the Royal Society B}, 360(1456):815--836, 2005.
+
+\bibitem{ friston2010free }
+K. Friston.
+\newblock The free-energy principle: a unified brain theory?
+\newblock \emph{Nature Reviews Neuroscience}, 11(2):127--138, 2010.
+
+\bibitem{ gopnik2012scientist }
+A. Gopnik.
+\newblock Scientific thinking in young children: Theoretical advances, empirical research, and policy implications.
+\newblock \emph{Science}, 337(6102):1623--1627, 2012.
+
+\bibitem{ ha2018world }
+D. Ha and J. Schmidhuber.
+\newblock World models.
+\newblock \emph{arXiv preprint arXiv:1803.10122}, 2018.
+
+\bibitem{ ha2020dream }
+D. Ha and J. Schmidhuber.
+\newblock World models as a promising path toward general intelligence: A critique.
+\newblock \emph{NeurIPS 2020 Workshop}, 2020.
+
+\bibitem{ lake2017building }
+B. Lake, T. D. Ullman, J. B. Tenenbaum, and S. J. Gershman.
+\newblock Building machines that learn and think like people.
+\newblock \emph{Behavioral and Brain Sciences}, 40, 2017.
+
+\bibitem{ onishi2005believing }
+K. Onishi and R. Baillargeon.
+\newblock Do 15-month-old infants understand false beliefs?
+\newblock \emph{Science}, 308(5719):255--258, 2005.
+
+\bibitem{ smith2021developmental }
+K. Smith et al.
+\newblock Developmental curricula and the shape of loss landscapes in deep neural networks.
+\newblock \emph{arXiv preprint arXiv:2112.03047}, 2021.
+
+\bibitem{ spelke1995spatial }
+E. S. Spelke.
+\newblock Spatiotemporal knowledge of a young child's knowledge.
+\newblock In \emph{An Invitation to Cognitive Science}, 1995.
+
+\bibitem{ spelke2007core }
+E. S. Spelke and K. D. Kinzler.
+\newblock Core knowledge.
+\newblock \emph{Developmental Science}, 10(1):89--96, 2007.
+
+\bibitem{ anglenets2023 }
+Anonymous.
+\newblock Angle geometry in neural network representations.
+\newblock \emph{In preparation}, 2023.
+
+\bibitem{ ugct2023 }
+Anonymous.
+\newblock Universal geometry-constrained training for physical reasoning.
+\newblock \emph{In preparation}, 2023.
+
+\end{thebibliography}
+
+\end{document}
