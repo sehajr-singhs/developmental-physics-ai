@@ -15,8 +15,9 @@
 Learning Intuitive Theories Through Embodied Interaction}}
 
 \author{
-  Developmental Physics AI Project\\
-  \texttt{dev-physics-ai@example.org}
+  Sehaj Randhir Singh\\
+  Independent researcher; partial affiliation with NYU Tandon School of Engineering\\
+  \texttt{github.com/sehajr-singhs/developmental-physics-ai}
 }
 
 \date{\today}
@@ -26,7 +27,7 @@ Learning Intuitive Theories Through Embodied Interaction}}
 \maketitle
 
 \begin{abstract}
-We argue that contemporary artificial intelligence systems lack the {\em core knowledge} that human infants possess: an intuitive understanding of objects, agents, forces, space, and time. We propose a developmental approach to machine learning in which an artificial agent learns physics through raw, unstructured sensory interaction with simulated environments. By combining the angle geometry of angle-nets with the physics constraints of UGCT, and guided by principles of predictive coding and active inference, we outline a four-stage developmental curriculum: sensorimotor learning, intuitive physics, intuitive psychology, and symbolic reasoning. We further connect this proposal to foundational work in developmental psychology and argue that a curriculum grounded in physical interaction is a necessary condition for robust, generalizable intelligence.
+Contemporary artificial intelligence excels at narrow tasks but lacks the intuitive physical understanding that human infants possess: objects persist, gravity pulls, agents act with goals. We propose \textbf{Developmental Physics AI}---an artificial learner that constructs intuitive theories of physics through embodied interaction with simulated environments, progressing through developmental stages analogous to human infancy. By integrating the angle-geometric weight structure of angle-nets, the physics constraints of UGCT, and the predictive-coding/active-inference framework, we outline a four-stage curriculum: sensorimotor learning, intuitive physics, intuitive psychology, and symbolic reasoning. We connect this proposal to foundational work in developmental psychology and argue that a curriculum grounded in physical interaction is a necessary condition for robust, generalizable intelligence. Unlike passive pretraining, our approach builds causal models bottom-up from sensory prediction, offering a path toward machines that truly understand the physical world.
 \end{abstract}
 
 \section{Introduction}
@@ -190,7 +191,35 @@ Several challenges remain. First, the sensorimotor stage requires a simulator th
 
 \section{Conclusion}
 
-We have outlined a manifesto for Developmental Physics AI: an artificial intelligence that learns physics the way a child does — from the bottom up, through embodied interaction, across developmental stages. By integrating angle geometry, physics constraints, predictive coding, and active inference, and grounding the curriculum in the empirical findings of developmental psychology, we believe it is possible to build AI systems that possess genuine physical intuition. Such systems would not only advance artificial intelligence but also provide a computational platform for testing theories of human cognitive development.
+We have outlined a manifesto for Developmental Physics AI: an artificial intelligence that learns physics the way a child does --- from the bottom up, through embodied interaction, across developmental stages. By integrating angle geometry, physics constraints, predictive coding, and active inference, and grounding the curriculum in the empirical findings of developmental psychology, we believe it is possible to build AI systems that possess genuine physical intuition. Such systems would not only advance artificial intelligence but also provide a computational platform for testing theories of human cognitive development.
+
+\section*{Broader impact}
+
+\paragraph{Scientific impact.}
+This work proposes a fundamental shift in how we build intelligent systems: from passive pattern matching on static datasets to active, developmental learning through physical interaction. If successful, this approach could yield AI that generalizes robustly to novel situations, understands causality, and transfers knowledge across domains---capabilities that remain elusive in current systems.
+
+\paragraph{Robotics and embodied AI.}
+A developmental physics learner provides a natural architecture for robotics: a robot that has passed through our four-stage curriculum would possess intuitive physics, object permanence, and theory of mind, enabling it to operate safely and effectively in unstructured human environments.
+
+\paragraph{Educational technology.}
+The four-stage curriculum mirrors human cognitive development and could inform the design of educational AI tutors that adapt to a child's developmental stage, providing physics instruction that respects how children actually learn.
+
+\paragraph{Scientific modeling.}
+The framework provides a computational testbed for developmental psychology theories. By implementing Spelke's core knowledge systems, Baillargeon's object permanence stages, and Gopnik's intuitive scientist hypothesis as neural modules, we can generate precise, testable predictions about infant cognition.
+
+\section*{Ethics}
+
+We identify no direct negative societal impact specific to this work. The proposed system learns physics through interaction with simulated environments and does not interact with humans or make high-stakes decisions in the real world. The developmental approach may, if anything, reduce risks associated with brittle, opaque AI systems by building models that understand physical causality rather than merely correlating patterns.
+
+Potential long-term considerations include: (i) if such systems are eventually deployed on physical robots, standard robotics safety protocols would apply; (ii) the curriculum's emphasis on active exploration could inform the design of AI systems that are more aligned with human values through shared physical experience; (iii) the interpretability afforded by angle-geometric weight structures may support auditing and transparency tooling.
+
+\section*{Data availability}
+
+No custom datasets were created for this manifesto. The simple 2D physics environment is defined procedurally in \texttt{environments/simple\_world.py}. The Stage 1 experiment generates data on-the-fly from this simulator. All results are reproducible from the committed code and fixed random seeds.
+
+\section*{Code availability}
+
+The Developmental Physics AI project is released under the MIT License. All core model code, environment definitions, experiments, and paper source are available at \texttt{github.com/sehajr-singhs/developmental-physics-ai}.
 
 \bibliographystyle{plainnat}
 \begin{thebibliography}{99}
@@ -275,15 +304,15 @@ E. S. Spelke and K. D. Kinzler.
 \newblock Core knowledge.
 \newblock \emph{Developmental Science}, 10(1):89--96, 2007.
 
-\bibitem{ anglenets2023 }
-Anonymous.
-\newblock Angle geometry in neural network representations.
-\newblock \emph{In preparation}, 2023.
+@bibitem{ anglenets2023 }
+Sehaj Randhir Singh.
+\newblock Angles as an axis of compute: Angle-weighted neural networks and the geometry of settled representations.
+\newblock \emph{arXiv preprint arXiv:2608.04518}, 2026.
 
-\bibitem{ ugct2023 }
-Anonymous.
-\newblock Universal geometry-constrained training for physical reasoning.
-\newblock \emph{In preparation}, 2023.
+@bibitem{ ugct2023 }
+Sehaj Randhir Singh.
+\newblock The Unified Geometric Continuous-Field Transformer: Learning multi-physics engineering as topologically constrained geometry.
+\newblock \emph{arXiv preprint arXiv:2608.04517}, 2026.
 
 \end{thebibliography}
 
